@@ -1,0 +1,11 @@
+const fs = require('node:fs');
+const path = require('node:path');
+const vm = require('node:vm');
+require('./build-interactions.cjs');
+const root = path.resolve(__dirname, '..');
+const html = fs.readFileSync(path.join(root, 'visualizar-becake.html'), 'utf8');
+for (const match of html.matchAll(/<script>([\s\S]*?)<\/script>/g)) new vm.Script(match[1]);
+if (/src="\.\/public\//.test(html)) throw new Error('Uma imagem ainda depende de caminho local.');
+fs.mkdirSync(path.join(root, 'dist'), { recursive: true });
+fs.writeFileSync(path.join(root, 'dist/index.html'), html);
+console.log('Site pronto em dist/index.html, com imagens e interações incorporadas.');

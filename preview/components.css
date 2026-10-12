@@ -1,0 +1,46 @@
+/* BêCake: interactive components, embedded in the portable HTML by the build script. */
+:root{--radius-photo:18px;--shadow-photo:0 8px 24px #493d3610;--shadow-raised:0 20px 40px #493d3622}
+.photo-gallery{gap:18px;perspective:1000px}
+.photo-tile{display:block;width:100%;padding:0;border:1px solid #493d3610;border-radius:var(--radius-photo);box-shadow:var(--shadow-photo);cursor:zoom-in;transition:transform 200ms var(--ease-out),box-shadow 200ms ease;transform-style:preserve-3d;touch-action:manipulation;position:relative}
+.photo-tile:after{content:'↗';position:absolute;right:10px;bottom:10px;width:30px;height:30px;border-radius:50%;display:grid;place-content:center;background:#faf7f0ed;color:var(--brown);font:16px Arial;opacity:0;transition:opacity 160ms ease}
+.photo-tile:focus-visible:after{opacity:1}
+.seal{width:120px;height:120px;padding:0;display:block}
+.seal-orbit{position:absolute;inset:0;width:100%;height:100%;animation:seal-orbit 24s linear infinite;overflow:visible}
+.seal-orbit text{font:10.3px Arial;letter-spacing:1.3px;fill:var(--sage)}
+.seal-center{position:absolute;inset:0;display:grid;place-content:center;font:29px Georgia;color:#a96e79}
+@keyframes seal-orbit{to{transform:rotate(360deg)}}
+.ribbon{display:block;overflow:hidden;padding:0;position:relative}
+.marquee-track{display:flex;width:max-content;animation:marquee-travel 32s linear infinite}
+.marquee-group{display:flex;flex-shrink:0;align-items:center;justify-content:space-around;gap:36px;min-width:max(100vw,800px);padding:20px 28px}
+.marquee-group span{white-space:nowrap}.ribbon:focus-within .marquee-track{animation-play-state:paused}
+@keyframes marquee-travel{to{transform:translateX(-50%)}}
+.creation-filters{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 26px}
+.filter-chip{border:1px solid var(--line);background:transparent;color:var(--brown);padding:11px 17px;border-radius:30px;font:13px Arial;cursor:pointer;transition:background-color 180ms ease,color 180ms ease,transform 160ms var(--ease-out)}
+.filter-chip[aria-pressed=true]{background:var(--sage);border-color:var(--sage);color:white}.filter-chip:active{transform:scale(.97)}
+.filter-status{font-size:12px;color:#766b61;min-height:18px;margin:14px 0 0}
+.lightbox{border:0;padding:0;width:min(920px,94vw);max-height:92dvh;background:transparent;color:var(--brown);overflow:visible}
+.lightbox::backdrop{background:#221b18bf;backdrop-filter:blur(7px)}
+.lightbox-panel{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);border-radius:24px;overflow:hidden;background:var(--cream);box-shadow:0 30px 90px #0005;position:relative;max-height:90dvh}
+.lightbox[open] .lightbox-panel{animation:lightbox-in 240ms var(--ease-out)}
+@keyframes lightbox-in{from{opacity:0;transform:translateY(12px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+.lightbox-image{background-image:var(--gallery-source);background-size:500% 100%;background-repeat:no-repeat;aspect-ratio:274/365;max-height:86dvh}
+.lightbox-image.source-1,.lightbox-image.source-2{background-size:500% 200%}
+.lightbox-copy{padding:70px 32px 30px;display:flex;flex-direction:column;justify-content:center;overflow:auto}
+.lightbox-copy h2{font:32px/1.13 Georgia;margin:14px 0}.lightbox-copy p{font:14px/1.7 Arial;color:#776c62}.lightbox-copy .pill{margin-top:20px;align-self:flex-start}
+.icon-button{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--cream);color:var(--brown);font:22px Arial;cursor:pointer;display:inline-grid;place-content:center;transition:background-color 160ms ease}
+.lightbox-close{position:absolute;right:14px;top:14px;z-index:1}.lightbox-controls{display:flex;gap:12px;align-items:center;margin-top:25px}.lightbox-count{font:12px Arial;color:#776c62}
+body.lightbox-open{overflow:hidden}
+.testimonials{padding:80px 0;background:#f2ebe5}.review-card{max-width:780px;margin:30px auto 0;text-align:center;background:#faf7f0;border:1px solid var(--line);border-radius:24px;padding:42px}
+.review-card blockquote{font:25px/1.5 Georgia;margin:18px 0;color:var(--brown)}.review-name{font-weight:bold;font-size:13px}.review-event{font-size:12px;color:#786d63}.review-stars{color:#a96e79;font-size:21px;letter-spacing:5px}.review-empty h3{font:29px Georgia;margin:16px 0}.review-empty p{font:15px/1.8 Arial;color:#776c62}.review-controls{display:flex;justify-content:center;align-items:center;gap:20px;margin-top:22px}.review-status{font-size:12px;color:#776c62}
+.floating-whatsapp{position:fixed;right:max(24px,env(safe-area-inset-right));bottom:max(24px,env(safe-area-inset-bottom));z-index:40;background:var(--sage);color:white;display:flex;gap:10px;align-items:center;padding:16px 20px;border-radius:40px;box-shadow:0 8px 28px #283d3133;font:bold 13px Arial;transition:transform 160ms var(--ease-out)}
+.floating-whatsapp svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:1.6}.floating-whatsapp:before{content:'';position:absolute;inset:0;border:1px solid var(--sage);border-radius:inherit;animation:contact-pulse 3s ease-out infinite;pointer-events:none}
+@keyframes contact-pulse{0%,30%{opacity:0;transform:scale(1)}35%{opacity:.45}90%,100%{opacity:0;transform:scale(1.18)}}
+.motion-toggle{position:fixed;bottom:20px;left:16px;z-index:35;border:1px solid var(--line);background:#faf7f0ef;color:var(--sage);border-radius:20px;padding:9px 12px;cursor:pointer;font:11px Arial;box-shadow:0 3px 12px #493d3610}
+.motion-paused .seal-orbit,.motion-paused .marquee-track,.motion-paused .floating-whatsapp:before{animation-play-state:paused}
+.motion-paused .photo-tile{transform:none!important}
+.component-reveal{transition:opacity 600ms var(--ease-out),transform 600ms var(--ease-out)}
+.component-reveal.waiting{opacity:0;transform:translateY(18px)}
+footer{padding-bottom:100px}
+@media(hover:hover) and (pointer:fine){.photo-tile:hover{box-shadow:var(--shadow-raised)}.photo-tile:hover:after{opacity:1}.ribbon:hover .marquee-track{animation-play-state:paused}.icon-button:hover{background:var(--pink)}.floating-whatsapp:hover{transform:translateY(-3px)}}
+@media(max-width:760px){.photo-gallery{gap:12px}.photo-tile{border-radius:14px}.lightbox-panel{grid-template-columns:1fr;overflow:auto}.lightbox-image{width:100%;max-height:none;aspect-ratio:274/365}.lightbox-copy{padding:25px}.lightbox-copy h2{font-size:27px}.lightbox-close{position:sticky;float:right;top:12px;margin:12px 12px -52px auto}.review-card{padding:28px 20px}.review-card blockquote{font-size:21px}.floating-whatsapp{right:16px;bottom:18px;padding:15px}.floating-whatsapp span{display:none}.motion-toggle{left:12px;bottom:20px}.testimonials{padding:60px 0}}
+@media(prefers-reduced-motion:reduce){.seal-orbit,.marquee-track,.floating-whatsapp:before{animation:none!important}.photo-tile{transform:none!important}.component-reveal.waiting{opacity:1;transform:none}.lightbox[open] .lightbox-panel{animation:none}.motion-toggle{display:none}}
