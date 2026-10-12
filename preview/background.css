@@ -1,0 +1,22 @@
+/* Low-opacity fluid layers, animated only while near the viewport. */
+.bg-host{position:relative;isolation:isolate}
+.bg-effects{position:absolute;inset:-24px -22px;z-index:-1;overflow:hidden;border-radius:32px;pointer-events:none;contain:layout paint}
+.bg-effects-hero{inset:0 -4%;border-radius:0}
+.syrup{position:absolute;width:75%;height:100%;pointer-events:none}
+.syrup-rose{top:0;right:-15%;fill:#c68c99;opacity:.12}
+.syrup-sage{bottom:0;left:-22%;fill:#8da995;opacity:.1}
+.syrup-flow{transform-origin:center;animation:syrup-drift 28s var(--ease-in-out) infinite;animation-play-state:paused}
+.syrup-sage .syrup-flow{animation-duration:34s;animation-delay:-12s}
+.bg-effects-hero .syrup{width:85%;height:90%}
+@keyframes syrup-drift{0%,100%{transform:translate(0,0) scale(1,1)}50%{transform:translate(14px,10px) scale(1.035,1.06)}}
+.sugar-particle{position:absolute;bottom:9%;left:14%;width:4px;height:4px;background:#b88770;border-radius:50%;opacity:0;animation:sugar-rise 18s linear infinite;animation-play-state:paused}
+.sugar-1{left:36%;width:3px;height:3px;background:#8da995;animation-duration:23s;animation-delay:-8s}
+.sugar-2{left:66%;width:5px;height:5px;background:#c68c99;animation-duration:21s;animation-delay:-14s;border-radius:1px}
+.sugar-3{left:82%;width:3px;height:3px;animation-duration:25s;animation-delay:-5s}
+.sugar-4{left:52%;width:3px;height:3px;background:#8da995;animation-duration:22s;animation-delay:-17s}
+.sugar-5{left:23%;width:4px;height:4px;background:#c68c99;animation-duration:26s;animation-delay:-11s;border-radius:1px}
+@keyframes sugar-rise{0%{opacity:0;transform:translate(0,15px) rotate(0)}20%{opacity:.25}70%{opacity:.2}100%{opacity:0;transform:translate(14px,-100px) rotate(50deg)}}
+.bg-running>.bg-effects .syrup-flow,.bg-running>.bg-effects .sugar-particle{animation-play-state:running}
+.motion-paused .bg-effects .syrup-flow,.motion-paused .bg-effects .sugar-particle,.bg-tab-hidden .bg-effects .syrup-flow,.bg-tab-hidden .bg-effects .sugar-particle{animation-play-state:paused}
+@media(max-width:760px){.bg-effects{inset:-16px -10px}.bg-effects-hero{inset:0 -3%}.sugar-3,.sugar-4,.sugar-5{display:none}.syrup-rose{opacity:.1}.syrup-sage{opacity:.1}}
+@media(prefers-reduced-motion:reduce){.bg-effects .syrup-flow{animation:none!important;transform:none}.bg-effects .sugar-particle{display:none}}

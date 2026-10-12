@@ -24,8 +24,18 @@ if (!html.includes('id="gallery-lightbox"')) {
 html = html.replace(/<section class="testimonials" id="depoimentos"(?! hidden)/, '<section class="testimonials" id="depoimentos" hidden');
 html = html.replace(/<!-- BECAKE-COMPONENTS-CSS -->[\s\S]*?<!-- END-BECAKE-COMPONENTS-CSS -->/g, '');
 html = html.replace(/<!-- BECAKE-COMPONENTS-JS -->[\s\S]*?<!-- END-BECAKE-COMPONENTS-JS -->/g, '');
-const css = fs.readFileSync(path.join(root, 'preview/components.css'), 'utf8');
-const js = fs.readFileSync(path.join(root, 'preview/components.js'), 'utf8');
+html = html.replace(/<!-- BECAKE-BG -->[\s\S]*?<!-- END-BECAKE-BG -->/g, '');
+const backgroundMarkup = require('../preview/background.cjs');
+html = html.replace(/<section class="wrap hero(?: bg-host)?" id="inicio">/, '<section class="wrap hero bg-host" id="inicio">' + backgroundMarkup(true));
+html = html.replace(/<div class="heading(?: bg-host)?">/g, '<div class="heading bg-host">' + backgroundMarkup());
+const css = fs.readFileSync(path.join(root, 'preview/components.css'), 'utf8') + '\n' + fs.readFileSync(path.join(root, 'preview/background.css'), 'utf8');
+// Hide decorative Unicode glyphs on mobile; preserve navigation controls and SVG icons.
+html = html.replace(/<span class="mobile-decoration" aria-hidden="true">([^<]*)<\/span>/g, '$1');
+html = html.split(/(<script\b[^>]*>[\s\S]*?<\/script>|<style\b[^>]*>[\s\S]*?<\/style>)/gi).map(part => {
+  if (/^<(script|style)\b/i.test(part)) return part.replace(/Ver mais criações ↓/g, 'Ver mais criações').replace(/Mostrar menos ↑/g, 'Mostrar menos');
+  return part.replace(/>([^<]+)</g, (_, text) => '>' + text.replace(/[✿♡↗↓↑✳Ⅱ▶]/gu, glyph => `<span class="mobile-decoration" aria-hidden="true">${glyph}</span>`) + '<');
+}).join('');
+const js = fs.readFileSync(path.join(root, 'preview/components.js'), 'utf8') + '\n' + fs.readFileSync(path.join(root, 'preview/background.js'), 'utf8');
 const reviews = fs.readFileSync(path.join(root, 'preview/reviews.js'), 'utf8');
 html = html.replace('</head>', `<!-- BECAKE-COMPONENTS-CSS --><style>${css}</style><!-- END-BECAKE-COMPONENTS-CSS --></head>`);
 html = html.replace('</body>', `<!-- BECAKE-COMPONENTS-JS --><script>${reviews}\n${js}</script><!-- END-BECAKE-COMPONENTS-JS --></body>`);

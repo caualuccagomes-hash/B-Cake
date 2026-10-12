@@ -5,6 +5,9 @@ Abra `../visualizar-becake.html` no navegador. Os componentes e as imagens estã
 - `components.css`: estilos responsivos, tilt, selo, marquee, lightbox, filtros, carrossel e WhatsApp.
 - `components.js`: interações, teclado, foco, filtros, pausa, animações e carrossel.
 - `reviews.js`: lista de depoimentos reais. Vazia enquanto não houver comentários autorizados.
+- `background.cjs`: vetores de calda e partículas decorativas do Hero e dos cabeçalhos.
+- `background.css`: movimento lento, calda com opacidade de 10–12%, pausa e redução de movimento.
+- `background.js`: suspende as animações fora da tela e em abas ocultas, sem loop JavaScript por frame.
 
 Depois de editar estes arquivos, execute na pasta do projeto:
 

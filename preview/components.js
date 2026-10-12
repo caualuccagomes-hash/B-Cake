@@ -93,7 +93,7 @@
   pause.addEventListener('click', () => {
     const paused = document.documentElement.classList.toggle('motion-paused');
     pause.setAttribute('aria-pressed', String(paused));
-    pause.textContent = paused ? '▶ Retomar animações' : 'Ⅱ Pausar animações';
+    pause.textContent = paused ? 'Retomar animações' : 'Pausar animações';
     tiles.forEach(tile => { tile.style.transform = ''; });
   });
   reduce.addEventListener('change', () => tiles.forEach(tile => { tile.style.transform = ''; }));
