@@ -8,6 +8,10 @@ Abra `../visualizar-becake.html` no navegador. Os componentes e as imagens estã
 - `background.cjs`: vetores de calda e partículas decorativas do Hero e dos cabeçalhos.
 - `background.css`: movimento lento, calda com opacidade de 10–12%, pausa e redução de movimento.
 - `background.js`: suspende as animações fora da tela e em abas ocultas, sem loop JavaScript por frame.
+- `menu-data.cjs`: preços, porções, sabores e condições transcritos das 12 páginas de cardápio enviadas pelo cliente.
+- `menu.cjs`, `menu.css`, `menu.js`: seção de cardápio, busca sem distinção de acentos, categorias, tabelas, páginas originais e CTAs individuais para o WhatsApp.
+
+As imagens originais do cardápio estão em `public/menu`. Os preços são os valores fornecidos nas imagens; a disponibilidade e o orçamento final são confirmados pela confeitaria. Os valores “a partir de” permanecem identificados, assim como os pedidos mínimos, os adicionais e os limites de decoração.
 
 Depois de editar estes arquivos, execute na pasta do projeto:
 
